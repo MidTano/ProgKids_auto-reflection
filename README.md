@@ -43,3 +43,7 @@
 - vosk
 - pyperclip
 
+
+##Фото
+
+!(https://i.imgur.com/5uNc3so.png)
