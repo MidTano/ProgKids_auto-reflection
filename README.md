@@ -44,6 +44,6 @@
 - pyperclip
 
 
-##Фото
+## Фото
 
-!(https://i.imgur.com/5uNc3so.png)
+![Внешний вид](https://i.imgur.com/5uNc3so.png)
