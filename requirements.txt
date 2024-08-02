@@ -1,4 +1,8 @@
 customtkinter
 sounddevice
-vosk
+pyaudiowpatch
 pyperclip
+deep-translator
+requests
+vosk
+SpeechRecognition
