@@ -266,19 +266,22 @@ class App(ctk.CTk):
             threading.Thread(target=self.update_recording_time, daemon=True).start()
 
     def update_text(self, speaker, start_time, end_time, text):
-        if self.translation_switch.get() and self.translation_language_var.get():
-            translated_text = self.translator.translate_text(text, src_language=self.language_var.get(),
-                                                             dest_language=self.translation_language_var.get())
-            self.translation_textbox.configure(state="normal")
-            self.translation_textbox.insert(ctk.END,
-                                            f"{speaker} {time.strftime('%H:%M:%S', time.gmtime(start_time))}-{time.strftime('%H:%M:%S', time.gmtime(end_time))} {translated_text}\n")
-            self.translation_textbox.see(ctk.END)
-            self.translation_textbox.configure(state="disabled")
-        self.textbox.configure(state="normal")
-        self.textbox.insert(ctk.END,
-                            f"{speaker} {time.strftime('%H:%M:%S', time.gmtime(start_time))}-{time.strftime('%H:%M:%S', time.gmtime(end_time))} {text}\n")
-        self.textbox.see(ctk.END)
-        self.textbox.configure(state="disabled")
+        def update_gui():
+            if self.translation_switch.get() and self.translation_language_var.get():
+                translated_text = self.translator.translate_text(text, src_language=self.language_var.get(),
+                                                                 dest_language=self.translation_language_var.get())
+                self.translation_textbox.configure(state="normal")
+                self.translation_textbox.insert(ctk.END,
+                                                f"{speaker} {time.strftime('%H:%M:%S', time.gmtime(start_time))}-{time.strftime('%H:%M:%S', time.gmtime(end_time))} {translated_text}\n")
+                self.translation_textbox.see(ctk.END)
+                self.translation_textbox.configure(state="disabled")
+            self.textbox.configure(state="normal")
+            self.textbox.insert(ctk.END,
+                                f"{speaker} {time.strftime('%H:%M:%S', time.gmtime(start_time))}-{time.strftime('%H:%M:%S', time.gmtime(end_time))} {text}\n")
+            self.textbox.see(ctk.END)
+            self.textbox.configure(state="disabled")
+
+        self.after(0, update_gui)
 
     def save_transcriptions(self):
         if not transcriptions:
