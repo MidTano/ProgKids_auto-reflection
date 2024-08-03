@@ -56,7 +56,8 @@ class GPT4o(ctk.CTkToplevel):
         pattern = re.compile(r'---.*(?:\n.*)*$', re.DOTALL)
         cleaned_text = re.sub(pattern, '', text)
         result_text = cleaned_text.strip()
-        return result_text
+        '''Вернуть result_text после исправления'''
+        return text
 
     def start_gpt_test(self):
         user_query = self.query_input.get("1.0", ctk.END).strip()
